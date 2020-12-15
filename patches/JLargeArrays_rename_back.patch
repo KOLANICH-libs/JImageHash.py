@@ -1,0 +1,697 @@
+From 4e8f730eb13240d03b554490502bdbeb07650f2a Mon Sep 17 00:00:00 2001
+From: KOLANICH <KOLANICH@users.noreply.github.com>
+Date: Mon, 21 Feb 2022 00:00:00 +0300
+Subject: [PATCH] Renamed the package back from `org.visnow.jlargearrays` into
+ `pl.edu.icm.jlargearrays`
+
+---
+ src/main/java/org/visnow/jlargearrays/Benchmark.java        | 2 +-
+ src/main/java/org/visnow/jlargearrays/ByteLargeArray.java   | 2 +-
+ .../org/visnow/jlargearrays/ComplexDoubleLargeArray.java    | 2 +-
+ .../org/visnow/jlargearrays/ComplexFloatLargeArray.java     | 2 +-
+ src/main/java/org/visnow/jlargearrays/ConcurrencyUtils.java | 2 +-
+ src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java | 4 ++--
+ src/main/java/org/visnow/jlargearrays/FloatLargeArray.java  | 4 ++--
+ .../java/org/visnow/jlargearrays/FloatingPointAsserts.java  | 2 +-
+ src/main/java/org/visnow/jlargearrays/IntLargeArray.java    | 4 ++--
+ src/main/java/org/visnow/jlargearrays/LargeArray.java       | 2 +-
+ .../java/org/visnow/jlargearrays/LargeArrayArithmetics.java | 2 +-
+ .../java/org/visnow/jlargearrays/LargeArrayOperator.java    | 2 +-
+ .../java/org/visnow/jlargearrays/LargeArrayStatistics.java  | 2 +-
+ src/main/java/org/visnow/jlargearrays/LargeArrayType.java   | 2 +-
+ src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java  | 2 +-
+ src/main/java/org/visnow/jlargearrays/LogicLargeArray.java  | 4 ++--
+ src/main/java/org/visnow/jlargearrays/LongLargeArray.java   | 4 ++--
+ src/main/java/org/visnow/jlargearrays/MemoryCounter.java    | 2 +-
+ src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java | 4 ++--
+ src/main/java/org/visnow/jlargearrays/ShortLargeArray.java  | 4 ++--
+ src/main/java/org/visnow/jlargearrays/StringLargeArray.java | 4 ++--
+ .../org/visnow/jlargearrays/UnsignedByteLargeArray.java     | 4 ++--
+ .../java/org/visnow/jlargearrays/ByteLargeArrayTest.java    | 2 +-
+ .../visnow/jlargearrays/ComplexDoubleLargeArrayTest.java    | 4 ++--
+ .../org/visnow/jlargearrays/ComplexFloatLargeArrayTest.java | 4 ++--
+ .../java/org/visnow/jlargearrays/DoubleLargeArrayTest.java  | 4 ++--
+ .../java/org/visnow/jlargearrays/FloatLargeArrayTest.java   | 4 ++--
+ .../java/org/visnow/jlargearrays/IntLargeArrayTest.java     | 2 +-
+ .../org/visnow/jlargearrays/LargeArrayArithmeticsTest.java  | 6 +++---
+ .../org/visnow/jlargearrays/LargeArrayStatisticsTest.java   | 4 ++--
+ src/test/java/org/visnow/jlargearrays/LargeArrayTest.java   | 2 +-
+ .../java/org/visnow/jlargearrays/LargeArrayUtilTest.java    | 4 ++--
+ .../java/org/visnow/jlargearrays/LogicLargeArrayTest.java   | 2 +-
+ .../java/org/visnow/jlargearrays/LongLargeArrayTest.java    | 2 +-
+ .../java/org/visnow/jlargearrays/NonSerializableClass.java  | 2 +-
+ .../java/org/visnow/jlargearrays/ObjectLargeArrayTest.java  | 2 +-
+ .../java/org/visnow/jlargearrays/SerializableClass.java     | 2 +-
+ .../java/org/visnow/jlargearrays/ShortLargeArrayTest.java   | 2 +-
+ .../java/org/visnow/jlargearrays/StringLargeArrayTest.java  | 2 +-
+ .../org/visnow/jlargearrays/UnsignedByteLargeArrayTest.java | 4 ++--
+ 40 files changed, 58 insertions(+), 58 deletions(-)
+
+diff --git a/src/main/java/org/visnow/jlargearrays/Benchmark.java b/src/main/java/org/visnow/jlargearrays/Benchmark.java
+index 22b4297..c51284e 100644
+--- a/src/main/java/org/visnow/jlargearrays/Benchmark.java
++++ b/src/main/java/org/visnow/jlargearrays/Benchmark.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.BufferedInputStream;
+ import java.io.BufferedOutputStream;
+diff --git a/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java b/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java
+index f609172..cf8395f 100644
+--- a/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+diff --git a/src/main/java/org/visnow/jlargearrays/ComplexDoubleLargeArray.java b/src/main/java/org/visnow/jlargearrays/ComplexDoubleLargeArray.java
+index 1581c23..07565e4 100644
+--- a/src/main/java/org/visnow/jlargearrays/ComplexDoubleLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ComplexDoubleLargeArray.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import org.apache.commons.math3.util.FastMath;
+ 
+diff --git a/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java b/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java
+index 930822a..8297c61 100644
+--- a/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import org.apache.commons.math3.util.FastMath;
+ 
+diff --git a/src/main/java/org/visnow/jlargearrays/ConcurrencyUtils.java b/src/main/java/org/visnow/jlargearrays/ConcurrencyUtils.java
+index 1cda856..56979b6 100644
+--- a/src/main/java/org/visnow/jlargearrays/ConcurrencyUtils.java
++++ b/src/main/java/org/visnow/jlargearrays/ConcurrencyUtils.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.util.concurrent.Callable;
+ import java.util.concurrent.ExecutionException;
+diff --git a/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java b/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java
+index 052d4bd..a585d9a 100644
+--- a/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java
+@@ -23,12 +23,12 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java b/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java
+index 5e7f527..71eee7e 100644
+--- a/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java
+@@ -23,12 +23,12 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/FloatingPointAsserts.java b/src/main/java/org/visnow/jlargearrays/FloatingPointAsserts.java
+index 7b5b221..d0ef50c 100644
+--- a/src/main/java/org/visnow/jlargearrays/FloatingPointAsserts.java
++++ b/src/main/java/org/visnow/jlargearrays/FloatingPointAsserts.java
+@@ -24,7 +24,7 @@
+  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  *
+  * ***** END LICENSE BLOCK ***** */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import org.junit.Assert;
+ import static org.junit.Assert.*;
+diff --git a/src/main/java/org/visnow/jlargearrays/IntLargeArray.java b/src/main/java/org/visnow/jlargearrays/IntLargeArray.java
+index 2e473cb..a7f8653 100644
+--- a/src/main/java/org/visnow/jlargearrays/IntLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/IntLargeArray.java
+@@ -23,12 +23,12 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/LargeArray.java b/src/main/java/org/visnow/jlargearrays/LargeArray.java
+index 768652e..4080b66 100644
+--- a/src/main/java/org/visnow/jlargearrays/LargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/LargeArray.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.InvalidObjectException;
+ import java.io.ObjectStreamException;
+diff --git a/src/main/java/org/visnow/jlargearrays/LargeArrayArithmetics.java b/src/main/java/org/visnow/jlargearrays/LargeArrayArithmetics.java
+index 759939d..d18d544 100644
+--- a/src/main/java/org/visnow/jlargearrays/LargeArrayArithmetics.java
++++ b/src/main/java/org/visnow/jlargearrays/LargeArrayArithmetics.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import org.apache.commons.math3.util.FastMath;
+ 
+diff --git a/src/main/java/org/visnow/jlargearrays/LargeArrayOperator.java b/src/main/java/org/visnow/jlargearrays/LargeArrayOperator.java
+index 0c0e008..d4ef6a9 100644
+--- a/src/main/java/org/visnow/jlargearrays/LargeArrayOperator.java
++++ b/src/main/java/org/visnow/jlargearrays/LargeArrayOperator.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.util.concurrent.ExecutionException;
+ import java.util.concurrent.Future;
+diff --git a/src/main/java/org/visnow/jlargearrays/LargeArrayStatistics.java b/src/main/java/org/visnow/jlargearrays/LargeArrayStatistics.java
+index 44d1ce3..1ef6327 100644
+--- a/src/main/java/org/visnow/jlargearrays/LargeArrayStatistics.java
++++ b/src/main/java/org/visnow/jlargearrays/LargeArrayStatistics.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.util.concurrent.Callable;
+ import java.util.concurrent.ExecutionException;
+diff --git a/src/main/java/org/visnow/jlargearrays/LargeArrayType.java b/src/main/java/org/visnow/jlargearrays/LargeArrayType.java
+index 853fe48..256a730 100644
+--- a/src/main/java/org/visnow/jlargearrays/LargeArrayType.java
++++ b/src/main/java/org/visnow/jlargearrays/LargeArrayType.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ /**
+  * Supported types of large arrays.
+diff --git a/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java b/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java
+index 64b41fb..9dc5070 100644
+--- a/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java
++++ b/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.lang.reflect.Field;
+ import java.util.Random;
+diff --git a/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java b/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java
+index 5e246c7..b83efda 100644
+--- a/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java
+@@ -23,14 +23,14 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+ import java.util.concurrent.ExecutionException;
+ import java.util.concurrent.Future;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/LongLargeArray.java b/src/main/java/org/visnow/jlargearrays/LongLargeArray.java
+index df4a678..7eae490 100644
+--- a/src/main/java/org/visnow/jlargearrays/LongLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/LongLargeArray.java
+@@ -23,12 +23,12 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/MemoryCounter.java b/src/main/java/org/visnow/jlargearrays/MemoryCounter.java
+index 19f1cb0..6943015 100644
+--- a/src/main/java/org/visnow/jlargearrays/MemoryCounter.java
++++ b/src/main/java/org/visnow/jlargearrays/MemoryCounter.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.util.concurrent.atomic.AtomicLong;
+ 
+diff --git a/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java b/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java
+index 4faaba1..1cbb0b8 100644
+--- a/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+@@ -31,7 +31,7 @@ import java.io.IOException;
+ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java b/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java
+index fe1294f..409426d 100644
+--- a/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java
+@@ -23,12 +23,12 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/StringLargeArray.java b/src/main/java/org/visnow/jlargearrays/StringLargeArray.java
+index d034219..f775d02 100644
+--- a/src/main/java/org/visnow/jlargearrays/StringLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/StringLargeArray.java
+@@ -23,13 +23,13 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.io.UnsupportedEncodingException;
+ import java.util.Arrays;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java b/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java
+index 839c7ed..097e692 100644
+--- a/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java
+@@ -23,12 +23,12 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
++import static pl.edu.icm.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+ /**
+  *
+diff --git a/src/test/java/org/visnow/jlargearrays/ByteLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/ByteLargeArrayTest.java
+index 6d96409..b7ddd0d 100644
+--- a/src/test/java/org/visnow/jlargearrays/ByteLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/ByteLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+diff --git a/src/test/java/org/visnow/jlargearrays/ComplexDoubleLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/ComplexDoubleLargeArrayTest.java
+index a2d6f70..b02897f 100644
+--- a/src/test/java/org/visnow/jlargearrays/ComplexDoubleLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/ComplexDoubleLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+@@ -32,7 +32,7 @@ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+ import static org.junit.Assert.*;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+diff --git a/src/test/java/org/visnow/jlargearrays/ComplexFloatLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/ComplexFloatLargeArrayTest.java
+index 56db457..55cf3d0 100644
+--- a/src/test/java/org/visnow/jlargearrays/ComplexFloatLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/ComplexFloatLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+@@ -32,7 +32,7 @@ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+ import static org.junit.Assert.*;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+diff --git a/src/test/java/org/visnow/jlargearrays/DoubleLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/DoubleLargeArrayTest.java
+index 38b63ba..1807289 100644
+--- a/src/test/java/org/visnow/jlargearrays/DoubleLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/DoubleLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+@@ -32,7 +32,7 @@ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+ import static org.junit.Assert.*;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+diff --git a/src/test/java/org/visnow/jlargearrays/FloatLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/FloatLargeArrayTest.java
+index 34dc749..b61225e 100644
+--- a/src/test/java/org/visnow/jlargearrays/FloatLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/FloatLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+@@ -32,7 +32,7 @@ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+ import static org.junit.Assert.*;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+diff --git a/src/test/java/org/visnow/jlargearrays/IntLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/IntLargeArrayTest.java
+index 4325aa3..e2bca1e 100644
+--- a/src/test/java/org/visnow/jlargearrays/IntLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/IntLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+diff --git a/src/test/java/org/visnow/jlargearrays/LargeArrayArithmeticsTest.java b/src/test/java/org/visnow/jlargearrays/LargeArrayArithmeticsTest.java
+index a0a83ad..6ac3e77 100644
+--- a/src/test/java/org/visnow/jlargearrays/LargeArrayArithmeticsTest.java
++++ b/src/test/java/org/visnow/jlargearrays/LargeArrayArithmeticsTest.java
+@@ -23,14 +23,14 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import org.apache.commons.math3.util.FastMath;
+-import static org.visnow.jlargearrays.LargeArrayArithmetics.*;
++import static pl.edu.icm.jlargearrays.LargeArrayArithmetics.*;
+ 
+ import static org.junit.Assert.*;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+diff --git a/src/test/java/org/visnow/jlargearrays/LargeArrayStatisticsTest.java b/src/test/java/org/visnow/jlargearrays/LargeArrayStatisticsTest.java
+index ddcd81c..b58bb39 100644
+--- a/src/test/java/org/visnow/jlargearrays/LargeArrayStatisticsTest.java
++++ b/src/test/java/org/visnow/jlargearrays/LargeArrayStatisticsTest.java
+@@ -23,11 +23,11 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import org.apache.commons.math3.util.FastMath;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+diff --git a/src/test/java/org/visnow/jlargearrays/LargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/LargeArrayTest.java
+index d4a1e3e..0f8c349 100644
+--- a/src/test/java/org/visnow/jlargearrays/LargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/LargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.util.ArrayList;
+ import java.util.Collection;
+diff --git a/src/test/java/org/visnow/jlargearrays/LargeArrayUtilTest.java b/src/test/java/org/visnow/jlargearrays/LargeArrayUtilTest.java
+index 954248b..dacedd5 100644
+--- a/src/test/java/org/visnow/jlargearrays/LargeArrayUtilTest.java
++++ b/src/test/java/org/visnow/jlargearrays/LargeArrayUtilTest.java
+@@ -23,12 +23,12 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import org.junit.Assert;
+ import static org.junit.Assert.*;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+diff --git a/src/test/java/org/visnow/jlargearrays/LogicLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/LogicLargeArrayTest.java
+index 0e0d13e..12cd21d 100644
+--- a/src/test/java/org/visnow/jlargearrays/LogicLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/LogicLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+diff --git a/src/test/java/org/visnow/jlargearrays/LongLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/LongLargeArrayTest.java
+index e657ae4..b779ff5 100644
+--- a/src/test/java/org/visnow/jlargearrays/LongLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/LongLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+diff --git a/src/test/java/org/visnow/jlargearrays/NonSerializableClass.java b/src/test/java/org/visnow/jlargearrays/NonSerializableClass.java
+index 1a55388..cd993a7 100644
+--- a/src/test/java/org/visnow/jlargearrays/NonSerializableClass.java
++++ b/src/test/java/org/visnow/jlargearrays/NonSerializableClass.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ /**
+  * A dummy class used in the unit tests for ObjectLargeArray.
+diff --git a/src/test/java/org/visnow/jlargearrays/ObjectLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/ObjectLargeArrayTest.java
+index 3f1e892..8dfff0b 100644
+--- a/src/test/java/org/visnow/jlargearrays/ObjectLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/ObjectLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+diff --git a/src/test/java/org/visnow/jlargearrays/SerializableClass.java b/src/test/java/org/visnow/jlargearrays/SerializableClass.java
+index 6625712..49efcb3 100644
+--- a/src/test/java/org/visnow/jlargearrays/SerializableClass.java
++++ b/src/test/java/org/visnow/jlargearrays/SerializableClass.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ /**
+  * A dummy class used in the unit tests for ObjectLargeArray.
+diff --git a/src/test/java/org/visnow/jlargearrays/ShortLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/ShortLargeArrayTest.java
+index 70a9a6e..a2a871b 100644
+--- a/src/test/java/org/visnow/jlargearrays/ShortLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/ShortLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+diff --git a/src/test/java/org/visnow/jlargearrays/StringLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/StringLargeArrayTest.java
+index ee1b024..66513fd 100644
+--- a/src/test/java/org/visnow/jlargearrays/StringLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/StringLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+diff --git a/src/test/java/org/visnow/jlargearrays/UnsignedByteLargeArrayTest.java b/src/test/java/org/visnow/jlargearrays/UnsignedByteLargeArrayTest.java
+index e8dd955..d2104c3 100644
+--- a/src/test/java/org/visnow/jlargearrays/UnsignedByteLargeArrayTest.java
++++ b/src/test/java/org/visnow/jlargearrays/UnsignedByteLargeArrayTest.java
+@@ -23,7 +23,7 @@
+  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  */
+-package org.visnow.jlargearrays;
++package pl.edu.icm.jlargearrays;
+ 
+ import java.io.ByteArrayInputStream;
+ import java.io.ByteArrayOutputStream;
+@@ -32,7 +32,7 @@ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+ import static org.junit.Assert.*;
+ import org.junit.Test;
+-import static org.visnow.jlargearrays.FloatingPointAsserts.*;
++import static pl.edu.icm.jlargearrays.FloatingPointAsserts.*;
+ 
+ /**
+  * Unit tests.
+-- 
+2.32.0
+
