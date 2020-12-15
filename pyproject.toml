@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.2.0", "wheel", "setuptools_scm[toml]>=3.4.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "JImageHash"
+readme = "ReadMe.md"
+description = "Python bindings to JImageHash Java library."
+authors = [{name = "KOLANICH"}]
+license = {text = "Unlicense"}
+classifiers = [
+	"Development Status :: 4 - Beta",
+	"Environment :: Other Environment",
+	"Intended Audience :: Developers",
+	"License :: Public Domain",
+	"Operating System :: OS Independent",
+	"Programming Language :: Python",
+	"Programming Language :: Python :: 3",
+	"Programming Language :: Python :: 3 :: Only",
+	"Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["JImageHash", "perceptual", "hash", "image"]
+requires-python = ">=3.4"
+dependencies = ["JAbs", "JavaImageTools", "numpy", "Pillow", "ImageHash"]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://codeberg.org/KOLANICH-libs/JImageHash.py"
+
+[tool.setuptools]
+zip-safe = true
+include-package-data = false
+
+[tool.setuptools.packages]
+find = {namespaces = false}
+
+[tool.setuptools_scm]

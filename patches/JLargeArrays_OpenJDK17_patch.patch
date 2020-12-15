@@ -1,0 +1,460 @@
+From 64fb29db94388db960a6900e4608e250e59e6c25 Mon Sep 17 00:00:00 2001
+From: KOLANICH <KOLANICH@users.noreply.github.com>
+Date: Mon, 21 Feb 2022 00:00:00 +0300
+Subject: [PATCH] Fixed compatibility with OpenJDK 17 by stopping using
+ internal API and using the public API instead.
+
+---
+ pom.xml                                           |  4 ++--
+ .../org/visnow/jlargearrays/ByteLargeArray.java   | 15 ++++++++++++---
+ .../jlargearrays/ComplexFloatLargeArray.java      |  1 -
+ .../org/visnow/jlargearrays/DoubleLargeArray.java | 10 +++++++---
+ .../org/visnow/jlargearrays/FloatLargeArray.java  | 15 ++++++++++++---
+ .../org/visnow/jlargearrays/IntLargeArray.java    | 15 ++++++++++++---
+ .../org/visnow/jlargearrays/LargeArrayUtils.java  |  2 ++
+ .../org/visnow/jlargearrays/LogicLargeArray.java  | 15 ++++++++++++---
+ .../org/visnow/jlargearrays/LongLargeArray.java   | 15 ++++++++++++---
+ .../org/visnow/jlargearrays/ObjectLargeArray.java | 15 ++++++++++++---
+ .../org/visnow/jlargearrays/ShortLargeArray.java  | 15 ++++++++++++---
+ .../org/visnow/jlargearrays/StringLargeArray.java | 15 ++++++++++++---
+ .../jlargearrays/UnsignedByteLargeArray.java      | 15 ++++++++++++---
+ 13 files changed, 119 insertions(+), 33 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index b353d04..17a5d2b 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -90,8 +90,8 @@
+                 <artifactId>maven-compiler-plugin</artifactId>
+                 <version>3.8.0</version>
+                 <configuration>
+-                    <source>1.8</source>
+-                    <target>1.8</target>
++                    <source>11</source>
++                    <target>11</target>
+                     <compilerArgument>-XDignore.symbol.file</compilerArgument>
+                     <fork>true</fork>
+                     <debug>true</debug>
+diff --git a/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java b/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java
+index 118fd40..f609172 100644
+--- a/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ByteLargeArray.java
+@@ -27,7 +27,6 @@ package org.visnow.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ 
+ /**
+@@ -859,7 +858,12 @@ public class ByteLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setByte(i, in.readByte());
+@@ -878,7 +882,12 @@ public class ByteLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, initValue);
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new byte[(int) length];
+diff --git a/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java b/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java
+index 3d01411..930822a 100644
+--- a/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ComplexFloatLargeArray.java
+@@ -25,7 +25,6 @@
+  */
+ package org.visnow.jlargearrays;
+ 
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ 
+ /**
+diff --git a/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java b/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java
+index 86e09d3..052d4bd 100644
+--- a/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/DoubleLargeArray.java
+@@ -27,7 +27,6 @@ package org.visnow.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -860,7 +859,12 @@ public class DoubleLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setDouble(i, in.readDouble());
+@@ -879,7 +883,7 @@ public class DoubleLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, initValue);
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Deallocator(ptr, length, type.sizeOf()));
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new double[(int) length];
+diff --git a/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java b/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java
+index 79cd4f2..5e7f527 100644
+--- a/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/FloatLargeArray.java
+@@ -27,7 +27,6 @@ package org.visnow.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -863,7 +862,12 @@ public class FloatLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setFloat(i, in.readFloat());
+@@ -882,7 +886,12 @@ public class FloatLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, initValue);
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new float[(int) length];
+diff --git a/src/main/java/org/visnow/jlargearrays/IntLargeArray.java b/src/main/java/org/visnow/jlargearrays/IntLargeArray.java
+index cc4984b..2e473cb 100644
+--- a/src/main/java/org/visnow/jlargearrays/IntLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/IntLargeArray.java
+@@ -27,7 +27,6 @@ package org.visnow.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -863,7 +862,12 @@ public class IntLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setInt(i, in.readInt());
+@@ -882,7 +886,12 @@ public class IntLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, initValue);
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new int[(int) length];
+diff --git a/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java b/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java
+index 93a46c5..64b41fb 100644
+--- a/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java
++++ b/src/main/java/org/visnow/jlargearrays/LargeArrayUtils.java
+@@ -46,6 +46,8 @@ public class LargeArrayUtils
+      */
+     public static final sun.misc.Unsafe UNSAFE;
+ 
++    public static final java.lang.ref.Cleaner CLEANER = java.lang.ref.Cleaner.create();
++
+     static {
+         Object theUnsafe = null;
+         Exception exception = null;
+diff --git a/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java b/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java
+index 780a0a6..5e246c7 100644
+--- a/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/LogicLargeArray.java
+@@ -29,7 +29,6 @@ import java.io.IOException;
+ import java.util.Arrays;
+ import java.util.concurrent.ExecutionException;
+ import java.util.concurrent.Future;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -1095,7 +1094,12 @@ public class LogicLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setByte(i, in.readByte());
+@@ -1114,7 +1118,12 @@ public class LogicLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, initValue);
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new byte[(int) length];
+diff --git a/src/main/java/org/visnow/jlargearrays/LongLargeArray.java b/src/main/java/org/visnow/jlargearrays/LongLargeArray.java
+index 43e01ba..df4a678 100644
+--- a/src/main/java/org/visnow/jlargearrays/LongLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/LongLargeArray.java
+@@ -27,7 +27,6 @@ package org.visnow.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -860,7 +859,12 @@ public class LongLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setLong(i, in.readLong());
+@@ -879,7 +883,12 @@ public class LongLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, initValue);
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new long[(int) length];
+diff --git a/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java b/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java
+index 24e0c36..4faaba1 100644
+--- a/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ObjectLargeArray.java
+@@ -30,7 +30,6 @@ import java.io.ByteArrayOutputStream;
+ import java.io.IOException;
+ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -639,7 +638,12 @@ public class ObjectLargeArray extends LargeArray
+                 throw new IllegalArgumentException("objectSizes == null || objectSizes.length() != length");
+             }
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(size * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, size, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(size * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 if (objectSizes.getShort(i) > 0) {
+@@ -659,7 +663,12 @@ public class ObjectLargeArray extends LargeArray
+         } else {
+             if (length > getMaxSizeOf32bitArray()) {
+                 ptr = LargeArrayUtils.UNSAFE.allocateMemory(size * type.sizeOf());
+-                Cleaner.create(this, new Deallocator(ptr, size, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(size * type.sizeOf());
+                 objectSizes = new ShortLargeArray(length);
+                 for (long i = 0; i < length; i++) {
+diff --git a/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java b/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java
+index 0c491f2..fe1294f 100644
+--- a/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/ShortLargeArray.java
+@@ -27,7 +27,6 @@ package org.visnow.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -856,7 +855,12 @@ public class ShortLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setShort(i, in.readShort());
+@@ -875,7 +879,12 @@ public class ShortLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, initValue);
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new short[(int) length];
+diff --git a/src/main/java/org/visnow/jlargearrays/StringLargeArray.java b/src/main/java/org/visnow/jlargearrays/StringLargeArray.java
+index b8582b9..d034219 100644
+--- a/src/main/java/org/visnow/jlargearrays/StringLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/StringLargeArray.java
+@@ -28,7 +28,6 @@ package org.visnow.jlargearrays;
+ import java.io.IOException;
+ import java.io.UnsupportedEncodingException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -942,7 +941,12 @@ public class StringLargeArray extends LargeArray
+                 throw new IllegalArgumentException("stringLengths == null || stringLengths.length() != length");
+             }
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(size * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, size, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(size * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 if (stringLengths.getShort(i) > 0) {
+@@ -962,7 +966,12 @@ public class StringLargeArray extends LargeArray
+         } else {
+             if (length > getMaxSizeOf32bitArray()) {
+                 ptr = LargeArrayUtils.UNSAFE.allocateMemory(size * type.sizeOf());
+-                Cleaner.create(this, new Deallocator(ptr, size, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(size * type.sizeOf());
+                 stringLengths = new ShortLargeArray(length);
+                 for (long i = 0; i < length; i++) {
+diff --git a/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java b/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java
+index bcd4c21..839c7ed 100644
+--- a/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java
++++ b/src/main/java/org/visnow/jlargearrays/UnsignedByteLargeArray.java
+@@ -27,7 +27,6 @@ package org.visnow.jlargearrays;
+ 
+ import java.io.IOException;
+ import java.util.Arrays;
+-import sun.misc.Cleaner;
+ import org.apache.commons.math3.util.FastMath;
+ import static org.visnow.jlargearrays.LargeArray.getMaxSizeOf32bitArray;
+ 
+@@ -893,7 +892,12 @@ public class UnsignedByteLargeArray extends LargeArray
+         }
+         if (data == null) {
+             ptr = LargeArrayUtils.UNSAFE.allocateMemory(length * type.sizeOf());
+-            Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++            LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                @Override
++                public void run() {
++                    LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                }
++            });
+             MemoryCounter.increaseCounter(length * type.sizeOf());
+             for (long i = 0; i < length; i++) {
+                 setByte(i, in.readByte());
+@@ -912,7 +916,12 @@ public class UnsignedByteLargeArray extends LargeArray
+                 if (initializeMemory) {
+                     initializeNativeMemory(length, (byte) (0xFF & initValue));
+                 }
+-                Cleaner.create(this, new Deallocator(ptr, length, type.sizeOf()));
++                LargeArrayUtils.CLEANER.register(this, new Runnable() {
++                    @Override
++                    public void run() {
++                        LargeArrayUtils.UNSAFE.freeMemory(ptr);
++                    }
++                });
+                 MemoryCounter.increaseCounter(length * type.sizeOf());
+             } else {
+                 data = new byte[(int) length];
+-- 
+2.32.0
+
